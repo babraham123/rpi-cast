@@ -1,0 +1,25 @@
+{
+    "name" : "RPiCastProject",
+    "version" : "0.0.1",
+    "description": "A nodejs app to automatically chromcast content using a raspberry pi",
+    "author": "Bereket Abraham <babraham42@gmail.com>",
+
+    "dependencies" : {
+        "socket.io" : "1.x",
+        "express" : "3.3.x",
+        "pi-gpio" : "0.0.6"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/babraham123/rpi-cast"
+    },
+    "keywords": [
+        "nodejs",
+        "socket.io",
+        "raspberry pi",
+        "chromium",
+        "chromecast"
+    ]
+}
+

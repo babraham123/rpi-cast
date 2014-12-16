@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EriTV chromecast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Bereket Abraham">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/static/custom.css">
+
+  <!-- javascript -->
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+  <script src="/js/eritv.js"></script>
+</head>
+<body>
+  <h1>Connect chromecast to EriTV automatically</h1>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <button onclick="startApp()" type="button" class="btn btn-success">Launch app</button>
+  <button onclick="stopApp()" type="button" class="btn btn-danger">Stop app</button>
+  <button onclick="joinSessionBySessionId()" type="button" class="btn btn-default">Join by session ID</button>
+  <br />
+  <br />
+  <button onclick="loadMediaUrl()" type="button" class="btn btn-default">Load media</button>
+  <button onclick="playResumeMedia()" type="button" class="btn btn-success">Play/Resume</button>
+  <button onclick="pauseMedia()" type="button" class="btn btn-warning">Pause</button>
+  <button onclick="stopMedia()" type="button" class="btn btn-danger">Stop</button>
+
+</body>
+</html>

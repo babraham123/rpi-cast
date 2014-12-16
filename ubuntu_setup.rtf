@@ -1,0 +1,129 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red25\green25\blue25;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl400
+
+\f0\fs28 \cf2 Ubuntu-14.04.1-LTS-64bit
+\f1\fs24 \cf0 \
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat1 \trwWidth15680\trftsWidth3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth15680\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl400
+
+\f0\fs28 \cf2 162.244.30.148
+\f1\fs24 \cf0 \cell \lastrow\row
+\pard\pardeftab720\sl380
+
+\f0\fs26 \cf3 user, SAPumUQeWu
+\f1\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+ssh user@162.244.30.148\
+\
+sudo apt-get update\
+sudo apt-get upgrade\
+sudo apt-get install nginx\
+\
+lscpu | grep '^CPU(s)'\
+	(record the number of CPUs, use that for the number of worker_processes)\
+\
+vi /etc/nginx/nginx.conf\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+user              nginx;\
+worker_processes  1;\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+	(set the number of worker_processes and the user to run as)\
+\
+vi /etc/nginx/conf.d/mysite.conf\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+# virtual host using mix of IP-, name-, and port-based configuration\
+# from the django app, mysite, running on gunicorn\
+\
+server \{\
+    listen       80;\
+#    listen       someip:8080;\
+    server_name  sitename.com;\
+\
+    access_log  /var/log/nginx/mysite.log;\
+\
+    location / \{\
+        proxy_set_header Host $http_host;\
+        proxy_set_header X-Forwarded-Host $server_name;\
+        proxy_set_header X-Real-IP $remote_addr;\
+        proxy_pass http://127.0.0.1:8001;\
+    \}\
+\
+    location /media/ \{\
+        root /home/username/mysite/media;\
+    \}\
+\
+    location /static/ \{\
+        root /home/username/mysite/static;\
+    \}\
+\
+    location /admin/media/ \{\
+        # this changes depending on your python version\
+        root /usr/lib/python2.6/site-packages/django/contrib;\
+    \}\
+\
+    location /socket.io/ \{\
+        proxy_pass http://127.0.0.1:8002;\
+        proxy_http_version 1.1;\
+        proxy_set_header Upgrade $http_upgrade;\
+        proxy_set_header Connection $connection_upgrade;\
+    \}\
+\
+    location /socket.io/static/ \{\
+        root /home/babraham/mysocketio/public;\
+    \}\
+\
+    error_page   500 502 503 504  /home/username/mysite/static/50x.html;\
+\}\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+sudo nginx -s reload\
+sudo service nginx restart\
+	(start up nginx)\
+\
+sudo apt-get install upstart\
+\
+vi /etc/init/mysite.conf\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+description "My website - mysite"\
+start on runlevel [2345]\
+stop on runlevel [06]\
+respawn\
+respawn limit 10 5\
+\
+script\
+                NAME=mysite\
+                PORT=8001\
+                NUM_WORKERS=2\
+                TIMEOUT=120\
+                USER=username\
+                GROUP=wheel\
+                LOGFILE=/var/log/gunicorn/$NAME.log\
+                LOGDIR=$(dirname $LOGFILE)\
+                test -d $LOGDIR || mkdir -p $LOGDIR\
+                cd /home/$USER/$NAME\
+                exec gunicorn_django \\\
+                         -w $NUM_WORKERS -t $TIMEOUT \\\
+                        --user=$USER --group=$GROUP --log-level=debug \\\
+                        --name=$NAME -b 127.0.0.1:$PORT \\\
+                        --log-file=$LOGFILE 2>>$LOGFILE\
+end script\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97 \
+\
+sudo start mysite\
+\
+sudo ln -s /lib/init/upstart-job /etc/init.d/mysite\
+	(add new system service)\
+update-rc.d mysite defaults\
+	(Make it starts at system boot)\
+\
+sudo initctl list\
+	(view status of all services)\
+\
+}

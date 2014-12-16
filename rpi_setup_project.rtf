@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fnil\fcharset0 Consolas;\f1\fnil\fcharset0 Monaco;\f2\fmodern\fcharset0 Courier;
+\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red251\green0\blue129;\red58\green58\blue58;
+\red243\green245\blue246;\red26\green26\blue26;\red239\green237\blue236;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl500
+
+\f0\fs32 \cf0 \cb2 \kerning1\expnd-2\expndtw-10
+sudo apt-get install nodejs \cb1 \kerning1\expnd-2\expndtw-10
+npm\
+\
+[create package.json]\
+npm\cb2 \kerning1\expnd-2\expndtw-10
+ install\
+\pard\pardeftab720
+
+\f1\fs28 \cf3 \cb1 \kerning1\expnd0\expndtw0 \
+sudo\cf4 \cb5  \cf0 \cb1 apt-get \cf3 install\cf4 \cb5  \cf0 \cb1 chromium\
+
+\f2\fs24 \cf6 \cb7 \kerning1\expnd4\expndtw20
+\
+\pard\pardeftab720\sl520
+\cf6 sudo apt-get install oracle-java7-jdk
+\f3 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sl340
+\cf0 sudo npm install forever -g\
+\pard\pardeftab720\sl500
+
+\f0\fs32 \cf0 \kerning1\expnd-2\expndtw-10
+sudo npm\cb2 \kerning1\expnd-2\expndtw-10
+ install -g selenium-java-robot
+\f3\fs24 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f4\fs22 \cf0 \CocoaLigature0 -------------------------------------------------
+\f3\fs24 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f4\fs22 \cf0 \CocoaLigature0 (Install python libraries for digital io pins) (client side on RPi)\
+\
+sudo apt-get install python2.7-dev\
+sudo apt-get install python-pip\
+sudo pip install -U RPi.GPIO\
+sudo pip install -U pyserial\
+\
+-------------------------------------------------\
+\
+Install and start mongodb\
+\
+uname -a\
+(make sure you\'92re running 64 bit)\
+\
+vi /etc/yum.repos.d/mongodb.repo\
+>>\
+[mongodb]\
+name=MongoDB Repository\
+baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\
+gpgcheck=0\
+enabled=1\
+<<\
+\
+sudo yum install mongodb-org\
+\
+sudo mkdir -p /data/db\
+\
+sudo service mongod start\
+(default port 27017)\
+(sudo mongod, on mac)\
+}
