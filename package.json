@@ -5,8 +5,8 @@
     "author": "Bereket Abraham <babraham42@gmail.com>",
 
     "dependencies" : {
-        "socket.io" : "1.x",
-        "express" : "3.3.x",
+        "mdns" : "2.2.2",
+        "castv2-client" : "0.0.8",
         "pi-gpio" : "0.0.6"
     },
 
@@ -16,9 +16,7 @@
     },
     "keywords": [
         "nodejs",
-        "socket.io",
         "raspberry pi",
-        "chromium",
         "chromecast"
     ]
 }
