@@ -1,29 +1,32 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-{\fonttbl\f0\fnil\fcharset0 Consolas;\f1\fnil\fcharset0 Monaco;\f2\fmodern\fcharset0 Courier;
-\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red251\green0\blue129;\red58\green58\blue58;
-\red243\green245\blue246;\red26\green26\blue26;\red239\green237\blue236;}
+{\fonttbl\f0\fnil\fcharset0 Consolas;\f1\fmodern\fcharset0 Courier;\f2\fswiss\fcharset0 Helvetica;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\fswiss\fcharset0 ArialMT;\f5\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red26\green26\blue26;\red239\green237\blue236;
+\red83\green83\blue83;\red239\green239\blue239;\red255\green255\blue255;\red234\green234\blue234;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \deftab720
 \pard\pardeftab720\sl500
 
 \f0\fs32 \cf0 \cb2 \kerning1\expnd-2\expndtw-10
-sudo apt-get install nodejs \cb1 \kerning1\expnd-2\expndtw-10
+sudo apt-get install -y nodejs \cb1 \kerning1\expnd-2\expndtw-10
 npm\
-\
-[create package.json]\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\pardeftab720\sl500
+\cf0 [create package.json]\
 npm\cb2 \kerning1\expnd-2\expndtw-10
  install\
+node server.js\
 \pard\pardeftab720
 
-\f1\fs28 \cf3 \cb1 \kerning1\expnd0\expndtw0 \
-sudo\cf4 \cb5  \cf0 \cb1 apt-get \cf3 install\cf4 \cb5  \cf0 \cb1 chromium\
-
-\f2\fs24 \cf6 \cb7 \kerning1\expnd4\expndtw20
+\f1\fs24 \cf3 \cb4 \kerning1\expnd4\expndtw20
 \
 \pard\pardeftab720\sl520
-\cf6 sudo apt-get install oracle-java7-jdk
-\f3 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\cf3 sudo apt-get install -y oracle-java7-jdk
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
 \pard\pardeftab720\sl340
 \cf0 sudo npm install forever -g\
 \pard\pardeftab720\sl500
@@ -31,16 +34,53 @@ sudo\cf4 \cb5  \cf0 \cb1 apt-get \cf3 install\cf4 \cb5  \cf0 \cb1 chromium\
 \f0\fs32 \cf0 \kerning1\expnd-2\expndtw-10
 sudo npm\cb2 \kerning1\expnd-2\expndtw-10
  install -g selenium-java-robot
-\f3\fs24 \cb1 \kerning1\expnd0\expndtw0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\f2\fs24 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
 
-\f4\fs22 \cf0 \CocoaLigature0 -------------------------------------------------
-\f3\fs24 \CocoaLigature1 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\f3\fs22 \cf0 \CocoaLigature0 -------------------------------------------------\
+\pard\pardeftab720\sl380
+\cf0 sudo apt-get install chromium-browser\
+\
+tightvncserver :1\
+Finder >> Go >> Connect to a Server\
+vnc://192.168.1.6:5901\
+\
+open Chromium\
+Install chromecast extension\
+\
+(on local computer)\
+{\field{\*\fldinst{HYPERLINK "http://chrome-extension-downloader.com/"}}{\fldrslt http://chrome-extension-downloader.com/}}\
+{\field{\*\fldinst{HYPERLINK "https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd/related?hl=en"}}{\fldrslt https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd/related?hl=en}}\
+scp Google-Cast_v14.1113.0.4.crx pi@192.168.1.6:/home/pi/Desktop\
+(terminal)\
+chromium-browser 
+\f1\fs26 \cf5 \cb6 \CocoaLigature1 --enable-extensions\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340
+\ls1\ilvl0
+\f4\fs28 \cf0 \cb7 {\listtext	1.	}Drag and drop the .CRX file onto the page 
+\f0 \cb8 chrome://extensions
+\f4 \cb7 \
+{\listtext	2.	}Click the 
+\i Install
+\i0  button in the prompt at the bottom of the screen \
+\pard\tx720\pardeftab720\sl340
 
-\f4\fs22 \cf0 \CocoaLigature0 (Install python libraries for digital io pins) (client side on RPi)\
+\f5\b\fs22 \cf0 \cb1 \CocoaLigature0 \
+
+\f3\b0 \
+\pard\pardeftab720\sl340
+
+\f0\fs28 \cf0 \cb8 \CocoaLigature1 dpkg --print-architecture\
+wget ftp://ftp.debian.org/debian/pool/main/c/chromium-browser/chromium-browser_37.0.2062.120-1~deb7u1_all.deb\
+sudo dpkg -i chromium-browser_37.0.2062.120-1~deb7u1_all.deb\
+
+\f3\fs22 \cb1 \CocoaLigature0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
+\cf0 -------------------------------------------------
+\f2\fs24 \CocoaLigature1 \
+\
+
+\f3\fs22 \CocoaLigature0 (Install python libraries for digital io pins) (client side on RPi)\
 \
 sudo apt-get install python2.7-dev\
 sudo apt-get install python-pip\
@@ -49,7 +89,7 @@ sudo pip install -U pyserial\
 \
 -------------------------------------------------\
 \
-Install and start mongodb\
+Install and start mongodb (optional)\
 \
 uname -a\
 (make sure you\'92re running 64 bit)\
