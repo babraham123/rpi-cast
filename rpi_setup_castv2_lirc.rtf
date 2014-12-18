@@ -4,10 +4,63 @@
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs24 \cf0 sudo apt-get install -y nodejs npm unzip git\
-sudo apt-get install lirc\
+\f0\fs24 \cf0 sudo apt-get install -y nodejs npm unzip git vim\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 >> package.json\
+---\
+\{\
+    "name" : "RPiCastProject",\
+    "version" : "0.0.1",\
+\
+    "dependencies" : \{\
+        "mdns" : "2.2.2",\
+        "castv2-client" : "0.0.8",\
+        "lirc_node" : "*",\
+        "pi-gpio" : "0.0.6"\
+    \}\
+\}\
+---\
+\
+npm install\
+\
+-------------------------------------\
+(iguanaworks)\
+echo "deb http://iguanaworks.net/downloads/debian binary-rasp/" |sudo tee /etc/apt/sources.list.d/iguanaworks.list>/dev/null\
+sudo apt-get update\
+sudo apt-get install iguanair\
+sudo apt-get build-dep lirc\
+sudo apt-get -b source lirc\
+sudo dpkg -i lirc-0.*.deb\
+lircd -H '?' | grep igua\
 \
 \
+Edit >> /etc/lirc/hardware.conf\
+---\
+#Chosen Remote Control\
+REMOTE="Iguanaworks USB IR Transceiver"\
+REMOTE_MODULES=""\
+DRIVER="iguanaIR"\
+REMOTE_LIRCD_CONF=""\
+REMOTE_LIRCD_ARGS="-r"\
+LIRCD_CONF="/etc/lirc/lircd.conf"\
+\
+#Chosen IR Transmitter\
+TRANSMITTER="None"\
+TRANSMITTER_MODULES=""\
+TRANSMITTER_DRIVER=""\
+TRANSMITTER_DEVICE=""\
+TRANSMITTER_LIRCD_CONF=""\
+TRANSMITTER_LIRCD_ARGS=""\
+---\
+-------------------------------------\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 (homemade emitter)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 sudo apt-get install lirc\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 Add to >> /etc/modules\
 ----\
 lirc_dev\
@@ -44,27 +97,7 @@ LIRCMD_CONF=""\
 \
 sudo /etc/init.d/lirc stop\
 sudo /etc/init.d/lirc start\
-\
-\
 --------------------------------------\
->> package.json\
----\
-\{\
-    "name" : "RPiCastProject",\
-    "version" : "0.0.1",\
-\
-    "dependencies" : \{\
-        "mdns" : "2.2.2",\
-        "castv2-client" : "0.0.8",\
-        "lirc_node" : "*",\
-        "pi-gpio" : "0.0.6"\
-    \}\
-\}\
----\
-\
-npm install\
-\
-\
 \
 \
 --------------------------------------\

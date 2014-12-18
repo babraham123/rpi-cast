@@ -7,7 +7,7 @@
     "dependencies" : {
         "mdns" : "2.2.2",
         "castv2-client" : "0.0.8",
-        "lirc_node" : "*",
+        "lirc_node" : "0.0.1",
         "pi-gpio" : "0.0.6"
     },
 
