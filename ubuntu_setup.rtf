@@ -1,7 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fswiss\fcharset0 ArialMT;}
-{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red25\green25\blue25;}
+\f3\fswiss\fcharset0 ArialMT;\f4\fnil\fcharset0 Consolas;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red38\green38\blue38;\red255\green255\blue255;
+\red25\green25\blue25;\red35\green35\blue35;\red246\green250\blue252;\red166\green9\blue22;\red245\green245\blue245;
+}
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \deftab720
 \pard\pardeftab720\sl400
@@ -13,42 +15,72 @@
 \clvertalc \clshdrawnil \clwWidth15680\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
 \pard\intbl\itap1\pardeftab720\sl400
 
-\f0\fs28 \cf2 162.244.30.148
-\f1\fs24 \cf0 \cell \lastrow\row
+\f0\fs28 \cf3 \cb4 104.167.97.77
+\f1\fs24 \cf0 \cb1 \cell \lastrow\row
 \pard\pardeftab720\sl380
 
-\f0\fs26 \cf3 user, SAPumUQeWu
+\f0\fs26 \cf5 user, e4yVu5ATy8
 \f1\fs24 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
 \cf0 \
-ssh user@162.244.30.148\
-\
 sudo apt-get update\
 sudo apt-get upgrade\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+sudo adduser babraham\
+	(libro to caras)\
+sudo usermod -a -G sudo babraham\
+(log off, log into new user)\
+\
+mkdir .ssh\
+ssh-keygen -t rsa -C "babraham42@gmail.com"\
+cat .ssh/id_rsa.pub\
+chmod 700 ~/.ssh\
+chmod 600 ~/.ssh/id_rsa\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
 
 \f2\fs22 \cf0 \CocoaLigature0 ---------------\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
 
-\f3\fs28 \cf0 \CocoaLigature1 sudo apt-get install -y build-essential libpcre3 libpcre3-dev libssl-dev unzip\
-wget {\field{\*\fldinst{HYPERLINK "http://nginx.org/download/nginx-1.7.7.tar.gz"}}{\fldrslt http://nginx.org/download/nginx-1.7.7.tar.gz}}\
-wget {\field{\*\fldinst{HYPERLINK "https://github.com/arut/nginx-rtmp-module/archive/master.zip"}}{\fldrslt https://github.com/arut/nginx-rtmp-module/archive/master.zip}}\
-tar -zxvf nginx-1.7.7.tar.gz\
+\f3\fs28 \cf0 \CocoaLigature1 sudo apt-get install git unzip\
+\pard\pardeftab720\sl300
+
+\i\fs24 \cf6 \cb7 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev\
+wget {\field{\*\fldinst{HYPERLINK "http://nginx.org/download/nginx-1.7.7.tar.gz"}}{\fldrslt \cf8 http://nginx.org/download/nginx-1.7.7.tar.gz}}\cf8 \
+\cf6 tar -zxvf nginx-1.7.7.tar.gz\
+wget {\field{\*\fldinst{HYPERLINK "https://github.com/arut/nginx-rtmp-module/archive/master.zip"}}{\fldrslt \cf8 https://github.com/arut/nginx-rtmp-module/archive/master.zip}}\
 unzip master.zip\
-cd nginx-1.7.7\
-./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master\
+
+\i0\fs28 \cf0 \cb1 cd 
+\i\fs24 \cf6 \cb7 nginx-1.7.7
+\i0\fs28 \cf0 \cb1 \
+\pard\pardeftab720\sl400
+
+\f4 \cf3 \cb9 ./configure --add-module=/home/babraham/nginx-rtmp-module-master --with-http_ssl_module\
 make\
 sudo make install\
 \
-(test with)\
-sudo /usr/local/nginx/sbin/nginx
-\f2\fs22 \CocoaLigature0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 ----------------
-\f1\fs24 \CocoaLigature1 \
+\pard\pardeftab720\sl300
+
+\f3\i\fs24 \cf6 \cb7 sudo /usr/local/nginx/sbin/nginx
+\f4\i0\fs28 \cf3 \cb9 \
+\pard\pardeftab720\sl400
+\cf3 	(Test)\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
-\cf0 \
+
+\f1\fs24 \cf0 \cb1 git clone git@github.com:babraham123/rpi-cast.git
+\f4\fs28 \cf3 \cb9 \
+\pard\pardeftab720\sl400
+\cf3 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
+
+\f3 \cf0 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural
+
+\f2\fs22 \cf0 \CocoaLigature0 ----------------
+\f1\fs24 \CocoaLigature1 \
+\
 lscpu | grep '^CPU(s)'\
 	(record the number of CPUs, use that for the number of worker_processes)\
 \
