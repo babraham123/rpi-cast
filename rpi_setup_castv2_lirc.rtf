@@ -1,0 +1,82 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 sudo apt-get install -y nodejs npm unzip git\
+sudo apt-get install lirc\
+\
+\
+Add to >> /etc/modules\
+----\
+lirc_dev\
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22\
+----\
+\
+Edit /etc/lirc/hardware.conf\
+---\
+# /etc/lirc/hardware.conf\
+#\
+# Arguments which will be used when launching lircd\
+LIRCD_ARGS="--uinput"\
+\
+# Don't start lircmd even if there seems to be a good config file\
+# START_LIRCMD=false\
+\
+# Don't start irexec, even if a good config file seems to exist.\
+# START_IREXEC=false\
+\
+# Try to load appropriate kernel modules\
+LOAD_MODULES=true\
+\
+# Run "lircd --driver=help" for a list of supported drivers.\
+DRIVER="default"\
+# usually /dev/lirc0 is the correct setting for systems using udev\
+DEVICE="/dev/lirc0"\
+MODULES="lirc_rpi"\
+\
+# Default configuration files for your hardware if any\
+LIRCD_CONF=""\
+LIRCMD_CONF=""\
+\
+---\
+\
+sudo /etc/init.d/lirc stop\
+sudo /etc/init.d/lirc start\
+\
+\
+--------------------------------------\
+>> package.json\
+---\
+\{\
+    "name" : "RPiCastProject",\
+    "version" : "0.0.1",\
+\
+    "dependencies" : \{\
+        "mdns" : "2.2.2",\
+        "castv2-client" : "0.0.8",\
+        "lirc_node" : "*",\
+        "pi-gpio" : "0.0.6"\
+    \}\
+\}\
+---\
+\
+npm install\
+\
+\
+\
+\
+--------------------------------------\
+(Emulate Chromecast)\
+wget https://github.com/mauimauer/nodecast/archive/master.zip\
+unzip master.zip\
+cd nodecast\
+node server.js --name Custom_Chromecast_Name\
+http://localhost:8008\
+\
+\
+\
+\
+\
+}
