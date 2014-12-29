@@ -1,0 +1,113 @@
+begin
+    button = KEY_POWER
+    prog = irexec
+    config = echo "terminal:tv#power" | nc localhost 4545; echo "terminal:fios#power" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_F1
+    prog = irexec
+    config = echo "terminal:chromecast#eritv" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_F2
+    prog = irexec
+    config = echo "terminal:chromecast#test" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_GUIDE
+    prog = irexec
+    config = echo "terminal:fios#guide" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_MUTE
+    prog = irexec
+    config = echo "terminal:tv#mute" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_MENU
+    prog = irexec
+    config = echo "terminal:tv#menu" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_LAST
+    prog = irexec
+    config = echo "terminal:fios#last" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_VOLUMEUP
+    prog = irexec
+    config = echo "terminal:tv#volumeup" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_VOLUMEDOWN
+    prog = irexec
+    config = echo "terminal:tv#volumedown" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_CHANNELUP
+    prog = irexec
+    config = echo "terminal:fios#channelup" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_CHANNELDOWN
+    prog = irexec
+    config = echo "terminal:fios#channeldown" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_PLAY
+    prog = irexec
+    config = echo "terminal:dvd#play" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_PAUSE
+    prog = irexec
+    config = echo "terminal:dvd#pause" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_STOP
+    prog = irexec
+    config = echo "terminal:dvd#stop" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_FORWARD
+    prog = irexec
+    config = echo "terminal:dvd#fastforward" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+begin
+    button = KEY_REWIND
+    prog = irexec
+    config = echo "terminal:dvd#fastbackward" | nc localhost 4545
+    remote = UNIVERSAL
+end
+
+

@@ -1,14 +1,14 @@
 {
     "name" : "RPiCastProject",
-    "version" : "0.0.1",
-    "description": "A nodejs app to automatically chromcast content using a raspberry pi",
+    "version" : "0.1.0",
+    "description": "A nodejs app to transceiver IR signals and chromcast content using a raspberry pi",
     "author": "Bereket Abraham <babraham42@gmail.com>",
 
     "dependencies" : {
         "mdns" : "2.2.2",
         "castv2-client" : "0.0.8",
         "lirc_node" : "0.0.1",
-        "pi-gpio" : "0.0.6"
+        "onoff" : "0.3.2"
     },
 
     "repository": {

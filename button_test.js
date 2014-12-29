@@ -1,18 +1,20 @@
-var gpio = require("pi-gpio");
+var Gpio = require('onoff').Gpio;
+var led = new Gpio(4, 'out');
+var button = new Gpio(17, 'in', 'falling', {persistentWatch: true, debounceTimeout: 300});
 
-gpio.open(16, "output", function(err) {        // Open pin 16 for output
-    gpio.write(16, 1, function() {            // Set pin 16 high (1)
-        gpio.close(16);                        // Close pin 16
-    });
+button.watch(function(err, value) {
+    if (err) exit();
+    led.writeSync(value);
+    console.log('Button value: ' + JSON.stringify(value));
 });
 
-gpio.open(15, "input");
+function exit() {
+    led.unexport();
+    button.unexport();
+    process.exit();
+}
 
-gpio.read(15, function(err, value) {
-    if(err) throw err;
-    console.log(value);    // The current state of the pin
-});
-
+process.on('SIGINT', exit);
 
 /*
 

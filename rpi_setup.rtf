@@ -48,13 +48,14 @@ sudo apt-get update\
 sudo apt-get upgrade\
 sudo apt-get autoremove\
 \
-(wifi dongle setup)\
+----------------------------\
+(wifi dongle setup - wpa)\
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.bak\
 \pard\pardeftab720\sl360
 \cf0 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 (change your ssid/passwrd)\
-------------\
+---\
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\
 update_config=1\
 \
@@ -62,7 +63,34 @@ network=\{\
         ssid="your_ssid"\
         psk="your_pass"\
 \}\
-------------\
+---\
+(wifi dongle setup - wep)\
+network=\{\
+        ssid="YourSSID"\
+        wep_key0="password12345"\
+        key_mgmt=NONE\
+\}\
+\
+\
+\
+(OR - wep)\
+sudo nano /etc/network/interfaces\
+---\
+# The loopback network interface\
+auto lo\
+iface lo inet loopback\
+ \
+# The primary (wired) network interface\
+iface eth0 inet dhcp\
+ \
+# The wifi (wireless) network interface\
+auto wlan0\
+allow-hotplug wlan0\
+iface wlan0 inet dhcp\
+       wireless-essid YOUR_SSID\
+       wireless-key YOUR_WEP_KEY\
+---\
+-------------------------\
 \
 sudo reboot\
 nmap -sn 192.168.1.0/24\

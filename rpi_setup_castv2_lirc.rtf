@@ -6,8 +6,7 @@
 
 \f0\fs24 \cf0 sudo apt-get install -y nodejs npm unzip git vim\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 >> package.json\
+>> package.json\
 ---\
 \{\
     "name" : "RPiCastProject",\
@@ -16,7 +15,7 @@
     "dependencies" : \{\
         "mdns" : "2.2.2",\
         "castv2-client" : "0.0.8",\
-        "lirc_node" : "*",\
+        "lirc_node" : "0.0.1",\
         "pi-gpio" : "0.0.6"\
     \}\
 \}\
@@ -25,42 +24,10 @@
 npm install\
 \
 -------------------------------------\
-(iguanaworks)\
-echo "deb http://iguanaworks.net/downloads/debian binary-rasp/" |sudo tee /etc/apt/sources.list.d/iguanaworks.list>/dev/null\
-sudo apt-get update\
-sudo apt-get install iguanair\
-sudo apt-get build-dep lirc\
-sudo apt-get -b source lirc\
-sudo dpkg -i lirc-0.*.deb\
-lircd -H '?' | grep igua\
+(homemade emitter)\
 \
+sudo apt-get install lirc lirc-x\
 \
-Edit >> /etc/lirc/hardware.conf\
----\
-#Chosen Remote Control\
-REMOTE="Iguanaworks USB IR Transceiver"\
-REMOTE_MODULES=""\
-DRIVER="iguanaIR"\
-REMOTE_LIRCD_CONF=""\
-REMOTE_LIRCD_ARGS="-r"\
-LIRCD_CONF="/etc/lirc/lircd.conf"\
-\
-#Chosen IR Transmitter\
-TRANSMITTER="None"\
-TRANSMITTER_MODULES=""\
-TRANSMITTER_DRIVER=""\
-TRANSMITTER_DEVICE=""\
-TRANSMITTER_LIRCD_CONF=""\
-TRANSMITTER_LIRCD_ARGS=""\
----\
--------------------------------------\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 (homemade emitter)\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 sudo apt-get install lirc\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
 Add to >> /etc/modules\
 ----\
 lirc_dev\
@@ -98,6 +65,61 @@ LIRCMD_CONF=""\
 sudo /etc/init.d/lirc stop\
 sudo /etc/init.d/lirc start\
 --------------------------------------\
+sudo /etc/init.d/lirc stop\
+mode2 -d /dev/lirc0\
+(confirm that IR signals are being detected)\
+\
+--------------------------------------\
+(Create a new remote control configuration)\
+(check for existing conf)\
+/usr/share/lirc/remotes/\
+\
+(find valid button names)\
+irrecord --list | less\
+\
+(start recording. follow instructions)\
+sudo service lirc stop\
+sudo irrecord --device=/dev/lirc0 /etc/lirc/lircd.WHATEVER_YOU_WANT.conf\
+\
+(add to /etc/lirc/lircd.conf)\
+---\
+include "/etc/lirc/lircd.WHATEVER_YOU_WANT.conf"\
+---\
+\
+(set in /etc/lirc/hardware.conf)\
+---\
+REMOTE_LIRCD_CONF="/etc/lirc/lircd.WHATEVER_YOU_WANT.conf"\
+---\
+\
+--------------------------------------\
+(Test new config file)\
+\
+(testing: receive)\
+sudo service lirc start\
+irw\
+(press btns on the remote and confirm that they are logged)\
+\
+(testing: send)\
+irsend LIST yamaha ""\
+irsend SEND_ONCE yamaha KEY_POWER\
+\
+\
+--------------------------------------\
+(execute commands on receive)\
+\
+(create /etc/lirc/lircrc)\
+---\
+begin\
+    button = KEY_VOLUMEUP\
+    prog = irexec\
+    config = /usr/bin/pactl -- set-sink-volume 0 +2%  # vol+\
+    repeat = 1\
+end\
+\
+begin\
+...\
+---\
+\
 \
 \
 --------------------------------------\
@@ -108,8 +130,6 @@ cd nodecast\
 node server.js --name Custom_Chromecast_Name\
 http://localhost:8008\
 \
-\
-\
-\
+-------------------------------------\
 \
 }

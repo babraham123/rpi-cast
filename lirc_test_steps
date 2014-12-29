@@ -1,0 +1,103 @@
+sudo apt-get install lirc lirc-x
+
+add to /etc/modules
+----
+lirc_dev
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+----
+
+/etc/lirc/hardware.conf
+-----
+# /etc/lirc/hardware.conf
+#
+# Arguments which will be used when launching lircd
+LIRCD_ARGS="--uinput"
+
+# Don't start lircmd even if there seems to be a good config file
+# START_LIRCMD=false
+
+# Don't start irexec, even if a good config file seems to exist.
+# START_IREXEC=false
+
+# Try to load appropriate kernel modules
+LOAD_MODULES=true
+
+# Run "lircd --driver=help" for a list of supported drivers.
+DRIVER="default"
+# usually /dev/lirc0 is the correct setting for systems using udev
+DEVICE="/dev/lirc0"
+MODULES="lirc_rpi"
+
+# Default configuration files for your hardware if any
+LIRCD_CONF=""
+LIRCMD_CONF=""
+-----
+
+sudo /etc/init.d/lirc stop
+mode2 -d /dev/lirc0
+(confirm that IR signals are being detected)
+
+--------------------------------------
+(Create a new remote control configuration: option 1)
+(check for existing conf)
+/usr/share/lirc/remotes/
+
+(find valid button names)
+irrecord --list | less
+
+(start recording. follow instructions)
+sudo service lirc stop
+sudo irrecord --device=/dev/lirc0 /etc/lirc/lircd.WHATEVER_YOU_WANT.conf
+
+(add to /etc/lirc/lircd.conf)
+---
+include "/etc/lirc/lircd.WHATEVER_YOU_WANT.conf"
+---
+
+(set in /etc/lirc/hardware.conf)
+---
+REMOTE_LIRCD_CONF="/etc/lirc/lircd.WHATEVER_YOU_WANT.conf"
+---
+
+--------------------------------------
+(Create a new remote control configuration: option 2)
+sudo /etc/init.d/lirc stop
+sudo mv /etc/lirc/lircd.conf /etc/lirc/lircd.conf-bak
+
+irrecord --list-namespace
+irrecord -d /dev/lirc0 ~/lircd.conf
+
+sudo cp ~/lircd.conf /etc/lirc/lircd.conf
+sudo /etc/init.d/lirc start
+
+
+---------------------------------------
+(Test new config file)
+
+(testing: receive)
+sudo service lirc start
+irw
+(press btns on the remote and confirm that they are logged)
+
+(testing: send)
+irsend LIST yamaha ""
+irsend SEND_ONCE yamaha KEY_POWER
+
+
+--------------------------------------
+(execute commands on receive)
+
+(create /etc/lirc/lircrc)
+---
+begin
+    button = KEY_VOLUMEUP
+    prog = irexec
+    config = /usr/bin/pactl -- set-sink-volume 0 +2%  # vol+
+    repeat = 1
+end
+
+begin
+...
+---
+
+

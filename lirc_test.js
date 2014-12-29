@@ -8,8 +8,10 @@ console.log(lirc_node.remotes);
   Let's pretend that the output of lirc_node.remotes looks like this:
 
   {
-    "tv": ["Power", "VolumeUp", "VolumeDown"],
-    "xbox360": ["Power", "A", "B"]
+    "something_tv": ["Power", "VolumeUp", "VolumeDown", "Insert"],
+    "lg_dvd_player": ["Up", "Down", "Left", "Right", "Enter", "Menu", 
+    				  "Play", "Pause", "Stop", "Rewind", "Forward"],
+    "verizon_fios": ["Menu", "0-9", "Guide", "Last"]
   }
 */
 

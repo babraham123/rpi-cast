@@ -17,23 +17,19 @@ function ondeviceup(host) {
   var client = new Client();
 
   client.connect(host, function() {
-    console.log('connected, launching app ...');
-
     client.launch(DefaultMediaReceiver, function(err, player) {
       var media = {
-
           // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
-        contentId: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4',
-        contentType: 'video/mp4',
-        streamType: 'BUFFERED', // or LIVE
+        contentId: 'http://104.167.97.77/hls/mystream.m3u8',
+        contentType: 'video/mp2t',   // application/vnd.apple.mpegurl
+        streamType: 'LIVE', // or BUFFERED
 
-        // Title and cover displayed while buffering
         metadata: {
           type: 0,
           metadataType: 0,
-          title: "Big Buck Bunny", 
+          title: "EriTV Live", 
           images: [
-            { url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg' }
+            { url: 'http://104.167.97.77/static/eritv_logo.png' }
           ]
         }        
       };
@@ -46,14 +42,14 @@ function ondeviceup(host) {
 
       player.load(media, { autoplay: true }, function(err, status) {
         console.log('media loaded playerState=%s', status.playerState);
-
+        /*
         // Seek to 2 minutes after 15 seconds playing.
         setTimeout(function() {
           player.seek(2*60, function(err, status) {
             //
           });
         }, 15000);
-
+        */
       });
 
     });
