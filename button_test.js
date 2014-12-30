@@ -1,6 +1,8 @@
 var Gpio = require('onoff').Gpio;
 var led = new Gpio(4, 'out');
 var button = new Gpio(17, 'in', 'falling', {persistentWatch: true, debounceTimeout: 300});
+//var button = new Gpio(17, 'in', 'falling');
+
 
 button.watch(function(err, value) {
     if (err) exit();

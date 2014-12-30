@@ -1,0 +1,191 @@
+Ubuntu-14.04.1-LTS-64bit
+104.167.97.77
+user, e4yVu5ATy8
+nginx,nginx
+
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo adduser babraham
+	(libro to caras)
+sudo usermod -a -G sudo babraham
+(log off, log into new user)
+
+mkdir .ssh
+ssh-keygen -t rsa -C "babraham42@gmail.com"
+cat .ssh/id_rsa.pub
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_rsa
+
+
+---------------
+sudo apt-get install git unzip
+sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+wget http://nginx.org/download/nginx-1.7.7.tar.gz
+tar -zxvf nginx-1.7.7.tar.gz
+wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+unzip master.zip
+cd nginx-1.7.7
+./configure --add-module=/home/babraham/nginx-rtmp-module-master --with-http_ssl_module
+make
+sudo make install
+
+sudo /usr/local/nginx/sbin/nginx
+	(Test)
+
+(install ffmpeg)
+sudo add-apt-repository ppa:jon-severinsson/ffmpeg
+sudo apt-get update
+sudo apt-get install ffmpeg
+
+(install codec)
+git clone git://github.com/yasm/yasm.git
+cd yasm
+./autogen.sh
+./configure
+make
+sudo make install
+git clone git://git.videolan.org/x264.git
+cd x264
+./configure --enable-static --enable-shared
+make
+sudo make install
+ldconfig
+
+git clone git@github.com:babraham123/rpi-cast.git
+
+sudo adduser nginx
+sudo chown -R nginx /tmp/hls
+
+sudo chmod 755 /home/babraham/rpi-cast -R
+	(0755 = User:rwx Group:r-x World:r-x)
+	(0644 = User:rwx Group:r World:r)
+sudo chmod 755 /tmp
+sudo chmod 755 /home/babraham
+sudo chmod 755 /home
+sudo chmod 755 /
+sudo chmod 777 /tmp/hls
+----------------
+
+lscpu | grep '^CPU(s)'
+	(record the number of CPUs, use that for the number of worker_processes)
+
+vi /usr/local/nginx/conf/nginx.conf
+---
+user root;
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /usr/local/nginx/conf/mime.types;
+    access_log  /var/log/nginx/rpicast.log;
+
+    server {
+        listen    80;
+        # server_name localhost;
+
+        location /hls {
+            # Serve HLS fragments
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp;
+
+            add_header Cache-Control no-cache;
+            add_header Access-Control-Allow-Origin *;
+        }
+
+        location /static/ {
+            root /home/babraham/rpi-cast;
+        }
+
+        # rtmp stat
+        location /stat {
+            rtmp_stat all;
+            rtmp_stat_stylesheet stat.xsl;
+        }
+        location /stat.xsl {
+            root /home/babraham/nginx-rtmp-module-master;
+        }
+        # rtmp control
+        location /control {
+            rtmp_control all;
+        }
+
+        error_page  500 502 503 504 /50x.html;
+        location = /50x.html {
+            root /home/babraham/rpi-cast/static;
+        }
+    }
+}
+rtmp {
+    server {
+        listen 1935;
+        # notify_method get;
+        # allow play all;
+
+        application src {
+            live on;
+            exec_pull ffmpeg -i rtmp://173.192.70.133/live/myStream -c:a copy -c:v libx264 -f flv rtmp://localhost/hls/mystream;
+        }
+
+        application hls {
+            live on;
+            hls on;
+            hls_path /tmp/hls;
+        }
+    }
+}
+---
+-----------------------------
+
+sudo nginx -s reload
+sudo service nginx restart
+	(start up nginx)
+
+sudo apt-get install upstart
+
+vi /etc/init/mysite.conf
+---
+description "My website - mysite"
+start on runlevel [2345]
+stop on runlevel [06]
+respawn
+respawn limit 10 5
+
+script
+                NAME=mysite
+                PORT=8001
+                NUM_WORKERS=2
+                TIMEOUT=120
+                USER=username
+                GROUP=wheel
+                LOGFILE=/var/log/gunicorn/$NAME.log
+                LOGDIR=$(dirname $LOGFILE)
+                test -d $LOGDIR || mkdir -p $LOGDIR
+                cd /home/$USER/$NAME
+                exec gunicorn_django \
+                         -w $NUM_WORKERS -t $TIMEOUT \
+                        --user=$USER --group=$GROUP --log-level=debug \
+                        --name=$NAME -b 127.0.0.1:$PORT \
+                        --log-file=$LOGFILE 2>>$LOGFILE
+end script
+---
+
+
+sudo start mysite
+
+#copy/download/curl/wget the init script
+sudo wget https://raw.github.com/JasonGiedymin/nginx-init-ubuntu/master/nginx -O /etc/init.d/nginx
+sudo chmod +x /etc/init.d/nginx
+vi /etc/init.d/nginx (edit nginxpath if necessary)
+
+sudo initctl list
+	(view status of all services)
+
+
+
