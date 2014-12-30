@@ -20,8 +20,8 @@ function ondeviceup(host) {
     client.launch(DefaultMediaReceiver, function(err, player) {
       var media = {
           // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
-        contentId: 'http://192.168.1.3:1234/mystream.m3u8',  // 'http://104.167.97.77/hls/mystream.m3u8',
-        contentType: 'application/vnd.apple.mpegurl', // 'application/x-mpegURL', //'video/mp2t',
+        contentId: 'http://www.nasa.gov/multimedia/nasatv/NTV-Public-IPS.m3u8',  // 'http://104.167.97.77/hls/mystream.m3u8',
+        contentType: 'application/vnd.apple.mpegurl',
         streamType: 'LIVE', // or BUFFERED
 
         metadata: {
@@ -34,10 +34,15 @@ function ondeviceup(host) {
         }        
       };
 
+      player.on('status', function(status) {
+        console.log('status broadcast playerState=%s', status.playerState);
+      });
+
       console.log('app "%s" launched, loading media %s ...', player.session.displayName, media.contentId);
 
       player.load(media, { autoplay: true }, function(err, status) {
-        console.log('media loaded playerState=%s', status.playerState);
+        if (err) { console.log(err); }
+        else { console.log('media loaded playerState=%s', status.playerState); }
       });
 
     });
