@@ -19,6 +19,11 @@ var btn_pin = 17;
 var led = null;
 var button = null;
 var terminal_port = 4545;
+
+var remotes = {"dvd": "/usr/share/lirc/remotes/rpidvd/lircd.conf.rpidvd",
+               "universal": "/usr/share/lirc/remotes/rpiuniversal/lircd.conf.rpiuniversal",
+               "tv": "/usr/share/lirc/remotes/rpitv/lircd.conf.rpitv",
+               "fios": "/usr/share/lirc/remotes/rpifios/lircd.conf.rpifios"};
 var mediaList = {
   "eritv": {
     // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
@@ -109,7 +114,7 @@ function launchReceiverServer() {
 
 function generateTransmission(message) {
   message = splitMessage(message, "#");
-  var remote = message.key;
+  var remote = remotes[message.key];
   var signal = message.value;
   if(remote === "chromecast") {
     if(signal in mediaList) {

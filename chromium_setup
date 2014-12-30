@@ -1,0 +1,66 @@
+sudo apt-get install -y nodejs npm
+
+[create package.json]
+npm install
+node server.js
+
+sudo apt-get install -y oracle-java7-jdk
+sudo npm install forever -g
+sudo npm install -g selenium-java-robot
+-------------------------------------------------
+sudo apt-get install chromium-browser
+
+tightvncserver :1
+Finder >> Go >> Connect to a Server
+vnc://192.168.1.6:5901
+
+open Chromium
+Install chromecast extension
+
+(on local computer)
+http://chrome-extension-downloader.com/
+https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd/related?hl=en
+scp Google-Cast_v14.1113.0.4.crx pi@192.168.1.6:/home/pi/Desktop
+(terminal)
+chromium-browser --enable-extensions
+	1.	Drag and drop the .CRX file onto the page chrome://extensions
+	2.	Click the Install button in the prompt at the bottom of the screen 
+
+
+dpkg --print-architecture
+wget ftp://ftp.debian.org/debian/pool/main/c/chromium-browser/chromium-browser_37.0.2062.120-1~deb7u1_all.deb
+sudo dpkg -i chromium-browser_37.0.2062.120-1~deb7u1_all.deb
+
+-------------------------------------------------
+
+(Install python libraries for digital io pins) (client side on RPi)
+
+sudo apt-get install python2.7-dev
+sudo apt-get install python-pip
+sudo pip install -U RPi.GPIO
+sudo pip install -U pyserial
+
+-------------------------------------------------
+
+Install and start mongodb (optional)
+
+uname -a
+(make sure you're running 64 bit)
+
+vi /etc/yum.repos.d/mongodb.repo
+>>
+[mongodb]
+name=MongoDB Repository
+baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
+gpgcheck=0
+enabled=1
+<<
+
+sudo yum install mongodb-org
+
+sudo mkdir -p /data/db
+
+sudo service mongod start
+(default port 27017)
+(sudo mongod, on mac)
+
