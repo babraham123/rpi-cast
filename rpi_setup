@@ -102,8 +102,10 @@ tightvncserver -kill :1
 (kill server)
 
 -----------------
-sudo apt-get install -y gcc g++ autoconf automake
+(useful packages)
+sudo apt-get install -y gcc g++ autoconf automake build-essentials
 sudo apt-get install -y upstart
+sudo apt-get install -y unzip git vim
 ---------------
 
 (configure and start project)
@@ -132,11 +134,5 @@ SSH pi@[ip address] (usually, else use 'arp -a' to get a list of IPs)
 (optional: clone SD card for backup)
 diskutil list
 sudo dd if=/dev/disk1 of=/Users/babraham/Desktop/clone1.dmg
-
----------------------
-(update node)
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n stable
 
 

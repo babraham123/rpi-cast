@@ -5,7 +5,6 @@
 // echo "terminal:tv#power" | nc localhost 4545
 // message = [source]:[destination]:[command/media type]
 
-
 var Client                = require('castv2-client').Client;
 var DefaultMediaReceiver  = require('castv2-client').DefaultMediaReceiver;
 var mdns                  = require('mdns');
@@ -93,7 +92,8 @@ function sendCommand(message) {
 function launchReceiverServer() {
   net.createServer( function(socket) {
     socket.on('data', function(data) {
-      //socket.write(data.toString());
+      data = data.toString();
+      //socket.write(data);
       data = splitMessage(data, ":");
       if(data && data.key) {
         console.log('message incoming from ' + data.key);
@@ -167,12 +167,11 @@ function ondeviceup(host, media) {
 
       console.log('app "%s" launched, loading media %s ...', player.session.displayName, media.contentId);
 
-      player.load(media, { autoplay: true }, function(err, status) {
-        console.log('media loaded playerState=%s', status.playerState);
+      player.load(media, { autoplay: true, currentTime: 0 }, function(err, status) {
+        if (err) { console.log(err); }
+        else { console.log('media loaded playerState=%s', status.playerState); }
       });
-
     });
-
   });
 
   client.on('error', function(err) {
