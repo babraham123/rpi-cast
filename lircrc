@@ -1,113 +1,113 @@
 begin
     button = KEY_POWER
     prog = irexec
-    config = echo "terminal:tv#KEY_POWER" | nc localhost 4545; echo "terminal:fios#KEY_POWER" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpitv#KEY_POWER" | nc localhost 4545; echo "terminal:fios#KEY_POWER" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_F1
     prog = irexec
     config = echo "terminal:chromecast#eritv" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_F2
     prog = irexec
     config = echo "terminal:chromecast#test" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_MENU
     prog = irexec
-    config = echo "terminal:fios#KEY_MENU" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpifios#KEY_MENU" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_MUTE
     prog = irexec
-    config = echo "terminal:tv#KEY_MUTE" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpitv#KEY_MUTE" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_CONTEXT_MENU
     prog = irexec
-    config = echo "terminal:dvd#KEY_MENU" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_MENU" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_LAST
     prog = irexec
-    config = echo "terminal:fios#KEY_LAST" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpifios#KEY_LAST" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_VOLUMEUP
     prog = irexec
-    config = echo "terminal:tv#KEY_VOLUMEUP" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpitv#KEY_VOLUMEUP" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_VOLUMEDOWN
     prog = irexec
-    config = echo "terminal:tv#KEY_VOLUMEDOWN" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpitv#KEY_VOLUMEDOWN" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_CHANNELUP
     prog = irexec
-    config = echo "terminal:fios#KEY_CHANNELUP" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpifios#KEY_CHANNELUP" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_CHANNELDOWN
     prog = irexec
-    config = echo "terminal:fios#KEY_CHANNELDOWN" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpifios#KEY_CHANNELDOWN" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_PLAY
     prog = irexec
-    config = echo "terminal:dvd#KEY_PLAY" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_PLAY" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_PAUSE
     prog = irexec
-    config = echo "terminal:dvd#KEY_PAUSE" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_PAUSE" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_STOP
     prog = irexec
-    config = echo "terminal:dvd#KEY_STOP" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_STOP" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_FORWARD
     prog = irexec
-    config = echo "terminal:dvd#KEY_FORWARD" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_FORWARD" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 begin
     button = KEY_REWIND
     prog = irexec
-    config = echo "terminal:dvd#KEY_REWIND" | nc localhost 4545
-    remote = RPIUNIVERSAL
+    config = echo "terminal:rpidvd#KEY_REWIND" | nc localhost 4545
+    remote = rpiuniversal
 end
 
 
