@@ -1,10 +1,12 @@
 // Controller for the Raspberry Pi portion of the RPiCast Project
 // by Bereket Abraham
 
+// execute
+// sudo node controller.js > /dev/null 2>&1
+
 // send commands to receiver server with this bash cmd:
 // echo "terminal:tv#power" | nc localhost 4545
 // message = [source]:[destination]:[command/media type]
-
 
 var Client                = require('castv2-client').Client;
 var DefaultMediaReceiver  = require('castv2-client').DefaultMediaReceiver;
@@ -20,15 +22,11 @@ var led = null;
 var button = null;
 var terminal_port = 4545;
 
-var remotes = {"dvd": "/usr/share/lirc/remotes/rpidvd/lircd.conf.rpidvd",
-               "universal": "/usr/share/lirc/remotes/rpiuniversal/lircd.conf.rpiuniversal",
-               "tv": "/usr/share/lirc/remotes/rpitv/lircd.conf.rpitv",
-               "fios": "/usr/share/lirc/remotes/rpifios/lircd.conf.rpifios"};
 var mediaList = {
   "eritv": {
     // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
     contentId: 'http://104.167.97.77/hls/mystream.m3u8',
-    contentType: 'video/mp2t',   // application/vnd.apple.mpegurl
+    contentType: 'application/vnd.apple.mpegurl',
     streamType: 'LIVE', // or BUFFERED
     metadata: {
       type: 0,
@@ -93,7 +91,8 @@ function sendCommand(message) {
 function launchReceiverServer() {
   net.createServer( function(socket) {
     socket.on('data', function(data) {
-      //socket.write(data.toString());
+      data = data.toString();
+      //socket.write(data);
       data = splitMessage(data, ":");
       if(data && data.key) {
         console.log('message incoming from ' + data.key);
@@ -114,7 +113,7 @@ function launchReceiverServer() {
 
 function generateTransmission(message) {
   message = splitMessage(message, "#");
-  var remote = remotes[message.key];
+  var remote = message.key;
   var signal = message.value;
   if(remote === "chromecast") {
     if(signal in mediaList) {
@@ -130,7 +129,8 @@ function generateTransmission(message) {
 }
 
 function splitMessage(message, split) {
-  if ( var a = message.indexOf(split) > -1) {
+  var a;
+  if (a = message.indexOf(split) > -1) {
     var kkey = message.substring(0, a + split.length - 1);
     var vvalue = message.substring(a + split.length);
 
@@ -167,12 +167,11 @@ function ondeviceup(host, media) {
 
       console.log('app "%s" launched, loading media %s ...', player.session.displayName, media.contentId);
 
-      player.load(media, { autoplay: true }, function(err, status) {
-        console.log('media loaded playerState=%s', status.playerState);
+      player.load(media, { autoplay: true, currentTime: 0 }, function(err, status) {
+        if (err) { console.log(err); }
+        else { console.log('media loaded playerState=%s', status.playerState); }
       });
-
     });
-
   });
 
   client.on('error', function(err) {
