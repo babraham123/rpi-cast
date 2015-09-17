@@ -16,6 +16,7 @@ sudo dd if=image-file.img of=/dev/disk38 bs=2m
 (plug in peripherals, like keyboard, network cable, and power)
 
 ifconfig (get ip address)
+install nmap on setup computer: https://nmap.org/download.html#macosx
 nmap -sn 192.168.1.0/24
 ssh pi@192.168.1.88
 username= pi

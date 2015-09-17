@@ -1,0 +1,65 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid="F91A4"
+        wep_key0="519FBE6ECA"
+        key_mgmt=NONE
+}
+
+network={
+        ssid="AE1BCC"
+        psk="88866093"
+}
+
+sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+	ssid="F91A4"
+	wep_key0=519FBE6ECA
+	key_mgmt=NONE
+	wep_tx_keyidx=0
+	priority=5
+}
+
+
+irrecord --list
+sudo service lirc stop
+sudo irrecord --device=/dev/lirc0 /usr/share/lirc/remotes/rpiuniversal/lircd.conf.rpiuniversal
+
+
+
+pi@bereketrocks ~/socket_controller $ node socketio_client.js
+"/dev/ttyACM0"
+Serial port opened
+errored: {"description":503}
+disconnected: "transport error"
+connected: undefined
+remote_updates: 000:#22CCCC,001:#22CCCC,002:#22CCCC,003:#22CCCC,004:#22CCCC,005:#22CCCC,006:#22CCCC,007:#22CCCC,008:#22CCCC,009:#22CCCC,010:#22CCCC,011:#22CCCC,012:#22CCCC,013:#22CCCC,014:#22CCCC,015:#22CCCC,016:#22CCCC,017:#22CCCC,018:#22CCCC,019:#22CCCC,020:#22CCCC,021:#22CCCC,022:#22CCCC,023:#22CCCC,024:#22CCCC,025:#22CCCC,026:#22CCCC,027:#22CCCC,028:#22CCCC,029:#22CCCC,030:#22CCCC,031:#22CCCC,032:#22CCCC,033:#22CCCC,034:#22CCCC,035:#22CCCC,036:#22CCCC,037:#22CCCC,038:#22CCCC,039:#22CCCC,040:#22CCCC,041:#22CCCC,042:#22CCCC,043:#22CCCC,044:#22CCCC,045:#22CCCC,046:#22CCCC,047:#22CCCC,048:#22CCCC,049:#FFAA33,050:#22CCCC,051:#22CCCC,052:#FFAA33,053:#22CCCC,054:#22CCCC,055:#22CCCC,056:#22CCCC,057:#22CCCC,058:#22CCCC,059:#22CCCC,060:#22CCCC,061:#22CCCC,062:#22CCCC,063:#22CCCC,064:#22CCCC,065:#FFAA33,066:#22CCCC,067:#22CCCC,068:#22CCCC,069:#22CCCC,070:#22CCCC,071:#22CCCC,072:#22CCCC,073:#22CCCC,074:#22CCCC,075:#22CCCC,076:#22CCCC,077:#22CCCC,078:#22CCCC,079:#22CCCC,080:#22CCCC,081:#22CCCC,082:#22CCCC,083:#22CCCC,084:#22CCCC,085:#22CCCC,086:#22CCCC,087:#22CCCC,088:#22CCCC,089:#22CCCC,090:#22CCCC,091:#22CCCC,092:#22CCCC,093:#22CCCC,094:#22CCCC,095:#22CCCC,096:#22CCCC,097:#22CCCC,098:#22CCCC,099:#22CCCC,100:#22CCCC,101:#22CCCC,102:#22CCCC,103:#22CCCC,104:#22CCCC,105:#22CCCC,106:#22CCCC,107:#22CCCC,108:#22CCCC,109:#22CCCC,110:#22CCCC,111:#22CCCC,112:#22CCCC,113:#22CCCC,114:#22CCCC,115:#22CCCC,116:#22CCCC,117:#22CCCC,118:#22CCCC,119:#22CCCC,120:#22CCCC,121:#22CCCC,122:#22CCCC,123:#22CCCC,124:#22CCCC,125:#22CCCC,126:#22CCCC,127:#22CCCC,128:#22CCCC,129:#22CCCC,130:#22CCCC,131:#22CCCC,132:#22CCCC,133:#22CCCC,134:#22CCCC,135:#22CCCC,136:#22CCCC,137:#22CCCC,138:#22CCCC,139:#22CCCC,140:#22CCCC,141:#22CCCC,142:#22CCCC,143:#22CCCC,144:#22CCCC,145:#22CCCC,146:#22CCCC,147:#22CCCC,148:#22CCCC,149:#22CCCC
+ln75
+ln75
+ln75
+ln75
+ln75
+...
+ln75
+ln75
+ln75
+ln75
+err Error: Error Input/output error calling write(...)
+results undefined
+drained
+err Error: Error Input/output error calling write(...)
+results undefined
+drained
+...
+
+
+contentId: 'http://static-cdn1.ustream.tv/swf/live/viewer:302.swf?vrsl=c:690&amp;ulbr=100',
+        contentType: 'application/x-shockwave-flash',
+
+
+
